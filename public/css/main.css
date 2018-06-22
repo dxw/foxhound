@@ -1,3 +1,10 @@
 .main {
   margin-top: 2rem;
 }
+
+.service-name {
+  margin-bottom: 0;
+  font-weight: normal;
+  margin-left: 40%;
+  vertical-align: bottom;
+}
