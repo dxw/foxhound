@@ -14,6 +14,12 @@ get '/success/:reference' do
   @payment_reference = params[:reference]
   haml :success
 end
+
+def base_url
+  'https://dxw-foxhound.herokuapp.com'
+  # "https://#{request.env['HTTP_HOST']}"
+end
+
 def create_payment
   reference = SecureRandom.hex(4)
   GovukPayApiClient::CreatePayment.call(
