@@ -1,8 +1,25 @@
 !!! 5
 %html
   %head
+    %meta{:charset => "utf-8"}
+    %title="Scarfolk payment confirmation"
+    %meta{ :name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
     %link{ :href => "/css/bootstrap.min.css", :media => "screen", :rel => "stylesheet" }
     %link{ :href => "/css/main.css", :media => "screen", :rel => "stylesheet" }
   %body
-    %h1 Scarfolk
-    %h2 Your Temporary event notice has been successful!
+    %header
+      %nav.navbar.navbar-expand-lg.navbar-light.bg-info
+        %a.navbar-brand.text-white{ href: '/' } Scarfolk
+    .main.container
+      .col-md-12
+        .jumbotron
+          %h1.display-4
+            Thanks
+          %p.lead
+            Your payment for
+            %strong.text-info
+              Temporary event notice
+            has been successful!
+          %hr.my-4
+          %p.lead
+            %a.btn.btn-primary.btn-lg{ href: '/'} Back to homepage
