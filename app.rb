@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'haml'
+require 'pry'
+require 'byebug'
 
 get '/' do
   haml :pay_now
