@@ -24,3 +24,9 @@ def create_payment
     "#{base_url}/success/#{reference}",
   ).next_url
 end
+
+class String
+  def blank?
+    self.empty? || self == ""
+  end
+end
