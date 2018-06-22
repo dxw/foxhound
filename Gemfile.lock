@@ -3,6 +3,9 @@ GEM
   specs:
     byebug (10.0.2)
     coderay (1.1.2)
+    excon (0.62.0)
+    govuk-pay-api-client (0.1.5)
+      excon (~> 0.51)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -27,6 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  govuk-pay-api-client
   haml
   pry
   sinatra

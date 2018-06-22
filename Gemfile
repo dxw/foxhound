@@ -8,5 +8,6 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'sinatra'
 gem 'haml'
+gem 'govuk-pay-api-client'
 gem 'pry'
 gem 'byebug'

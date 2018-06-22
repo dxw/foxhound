@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'haml'
+require 'govuk_pay_api_client'
 require 'pry'
 require 'byebug'
 
