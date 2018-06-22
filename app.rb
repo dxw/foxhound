@@ -10,7 +10,8 @@ get '/' do
   @next_url = create_payment
   haml :pay_now
 end
-get '/success' do
+get '/success/:reference' do
+  @payment_reference = params[:reference]
   haml :success
 end
 def create_payment

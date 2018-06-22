@@ -14,13 +14,11 @@
           Apply for Temporary Event Notice
     .main.container
       .col-md-12
-        .jumbotron
-          %h1.display-4
+        .jumbotron.bg-info
+          %h1.display-4.text-white
             Complete
-          %p.lead
-            Thank you for paying for your
-            %strong.text-info
-              Temporary Event Notice application.
-          %hr.my-4
-          %p.lead
-            %a.btn.btn-primary.btn-lg{ href: '/'} Back to homepage
+          %p.lead.text-white
+            Thank you for paying for your Temporary Event Notice application.
+          %p.text-white= "Your reference is: #{@payment_reference}"
+        %p.lead
+          %a.btn.btn-primary.btn-lg{ href: '/'} Back to homepage
