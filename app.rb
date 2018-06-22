@@ -4,6 +4,7 @@ require 'govuk_pay_api_client'
 require 'securerandom'
 require 'pry'
 require 'byebug'
+require 'excon'
 
 get '/' do
   @next_url = create_payment
