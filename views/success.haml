@@ -1,24 +1,10 @@
-!!! 5
-%html
-  %head
-    %meta{:charset => "utf-8"}
-    %title="Scarfolk payment confirmation"
-    %meta{ :name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;"}
-    %link{ :href => "/css/bootstrap.min.css", :media => "screen", :rel => "stylesheet" }
-    %link{ :href => "/css/main.css", :media => "screen", :rel => "stylesheet" }
-  %body
-    %header
-      %nav.navbar.navbar-expand-lg.navbar-light.bg-info
-        %a.navbar-brand.text-white{ href: '/' } Scarfolk
-        %span.h6.service-name.text-white
-          Apply for Temporary Event Notice
-    .main.container
-      .col-md-12
-        .jumbotron.bg-info
-          %h1.display-4.text-white
-            Complete
-          %p.lead.text-white
-            Thank you for paying for your Temporary Event Notice application.
-          %p.text-white= "Your reference is: #{@payment_reference}"
-        %p.lead
-          %a.btn.btn-primary.btn-lg{ href: '/'} Back to homepage
+.govuk-panel.govuk-panel--confirmation
+  %h2.govuk-panel__title
+    Payment complete
+  .govuk-panel__body
+    Your reference number
+    %br
+    %strong= @payment_reference
+
+%p
+  %a.govuk-back-link{ href: '/'} Back to homepage
