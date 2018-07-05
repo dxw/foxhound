@@ -16,6 +16,7 @@ GEM
     byebug (10.0.2)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
+    dotenv (2.5.0)
     excon (0.62.0)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -70,6 +71,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   byebug
+  dotenv
   govuk-pay-api-client
   haml
   pry
