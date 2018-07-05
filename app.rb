@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/activerecord'
+require 'dotenv/load'
 require 'haml'
 require 'govuk_pay_api_client'
 require 'securerandom'
