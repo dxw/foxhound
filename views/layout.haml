@@ -4,6 +4,7 @@
     %meta{charset: 'utf-8'}/
     %title Scarfolk - Pay for a penalty charge notice
     %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+    %link{href: '/assets/images/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'}/
     %link{href: '/assets/app.css', rel: 'stylesheet'}
 
   %body.govuk-template__body
@@ -15,11 +16,21 @@
         .govuk-header__logo
           %a.govuk-header__link.govuk-header__link--homepage{href: '/'}
             %span.govuk-header__logotype
+              %svg{ role: 'presentation', focusable: 'false', height: '36', width: '36', focusable: 'false', viewbox: '0 0 587 587', xmlns: 'http://www.w3.org/2000/svg'}
+                %path{d: 'M293.5 568.5A275 275 0 0 1 99.05 99.05 275 275 0 1 1 488 488a273.19 273.19 0 0 1-194.5 80.5zm-.53-438c-89.57 0-162.44 72.87-162.44 162.44S203.4 455.4 293 455.4 455.4 382.53 455.4 293 382.53 130.53 293 130.53z'}
+                %path{d: 'M293.5 37C435.16 37 550 151.84 550 293.5S435.16 550 293.5 550 37 435.16 37 293.5 151.84 37 293.5 37m-.5 436.9A180.94 180.94 0 0 0 473.9 293c0-100-81.01-181-180.9-181a180.94 180.94 0 0 0-181 181c0 99.89 81 180.9 181 180.9M293.5 0a293.56 293.56 0 0 0-114.25 563.92 293.56 293.56 0 0 0 228.5-540.84A291.71 291.71 0 0 0 293.5 0zm-.5 436.9a143.94 143.94 0 1 1 101.77-42.16A143 143 0 0 1 293 436.9z', fill: '#fff'}
+                %path{d: 'M293 485.9c-106.42 0-193-86.55-193-192.9s86.58-193 193-193 192.9 86.58 192.9 193S399.35 485.9 293 485.9zm121.57-88.39V187.36H171.4v210.15z'}
+                %path{d: 'M293 112c99.89 0 180.9 81 180.9 181A180.94 180.94 0 0 1 293 473.9c-100 0-181-81.01-181-180.9a180.94 180.94 0 0 1 181-181M159.4 409.51h267.14V175.36H159.4v234.15M293 88a204.43 204.43 0 1 0 79.77 16.12A203.72 203.72 0 0 0 293 88zM183.4 199.36h219.14v186.15H183.4V199.36z', fill: '#fff'}
+                %path{d: 'M159.4 409.51h267.14V175.36H159.4zM293 183.34c65.34 0 118.35 48.79 118.66 109.09-.31-.29-53.32-49-118.66-49s-118.35 48.66-118.67 49c.29-60.3 53.29-109.09 118.67-109.09zm39.88 110.16a39.38 39.38 0 1 1-39.38-39.38 39.38 39.38 0 0 1 39.38 39.38zm-158.58-1.06c.31.28 53.32 48.95 118.67 48.95s118.35-48.67 118.66-48.95v.53c0 60.54-53.13 109.62-118.67 109.62S174.3 353.51 174.3 293z', fill: '#fff'}
+                %path{d: 'M293 243.48c65.34 0 118.35 48.66 118.66 49-.31-60.3-53.32-109.09-118.66-109.09s-118.38 48.74-118.7 109.04c.32-.29 53.32-48.95 118.7-48.95z'}
+                %path{d: 'M293 402.59c65.54 0 118.67-49.08 118.67-109.62v-.53c-.31.28-53.31 48.95-118.66 48.95s-118.4-48.67-118.71-48.95v.56c0 60.51 53.13 109.59 118.7 109.59z'}
+                %circle{cx: '293.5', cy: '293.5', r: '39.38'}
+
               %span.govuk-header__logotype-text
-                Scarfolk
+                Scarfolk Council
         .govuk-header__content
           %a.govuk-header__link.govuk-header__link--service-name{href: '/'}
-            Pay for a penalty charge notice
+            Pay a Penalty Charge Notice
     .govuk-width-container
       %main#main-content.govuk-main-wrapper{role: 'main'}
         = yield
@@ -27,10 +38,10 @@
       .govuk-width-container
         .govuk-footer__meta
           .govuk-footer__meta-item.govuk-footer__meta-item--grow
-            %svg.govuk-footer__licence-logo{focusable: "false", height: "17", role: "presentation", viewbox: "0 0 483.2 195.7", width: "41", xmlns: "http://www.w3.org/2000/svg"}
-              %path{d: "M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145", fill: "currentColor"}
+            %svg.govuk-footer__licence-logo{focusable: 'false', height: '17', role: 'presentation', viewbox: '0 0 483.2 195.7', width: '41', xmlns: 'http://www.w3.org/2000/svg'}
+              %path{d: 'M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145', fill: 'currentColor'}
             %span.govuk-footer__licence-description
               All content is available under the
-              %a.govuk-footer__link{href: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", rel: "license"} Open Government Licence v3.0
+              %a.govuk-footer__link{href: 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/', rel: 'license'} Open Government Licence v3.0
           .govuk-footer__meta-item
             -#%a.govuk-footer__link.govuk-footer__copyright-logo{:href => "http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/"} © Crown copyright

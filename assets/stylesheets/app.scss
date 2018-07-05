@@ -9,6 +9,16 @@ $govuk-brand-colour: #28a197;
   .govuk-header__logo {
     width: 32%;
   }
+
+  .govuk-header__logotype,.govuk-header__logotype-fallback-image {
+      position: relative;
+      top: -2px
+  }
+
+  .govuk-header__link--service-name {
+    position: relative;
+    top: 10px;
+  }
 }
 
 h1 {
