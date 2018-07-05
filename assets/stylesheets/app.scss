@@ -1,12 +1,16 @@
+$govuk-font-family: 'Roboto', sans-serif;
+$govuk-global-styles: true;
+$govuk-brand-colour: #28a197;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "../../node_modules/govuk-frontend/all";
 
-.main {
-  margin-top: 2rem;
+@include govuk-media-query($from: tablet) {
+  .govuk-header__logo {
+    width: 32%;
+  }
 }
 
-.service-name {
-  margin-bottom: 0;
-  font-weight: normal;
-  margin-left: 40%;
-  vertical-align: bottom;
+h1 {
+  @extend .govuk-heading-xl
 }

@@ -31,6 +31,7 @@ class Foxhound < Sinatra::Base
     @next_url = create_payment
     haml :pay_now
   end
+
   get '/success/:reference' do
     @payment_reference = params[:reference]
     haml :success
