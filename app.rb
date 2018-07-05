@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/activerecord'
 require 'haml'
 require 'govuk_pay_api_client'
 require 'securerandom'
@@ -9,7 +10,11 @@ require 'sprockets'
 require 'uglifier'
 require 'sass'
 
+Dir['./models/*.rb'].each { |file| require file }
+
 class Foxhound < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
+  set :database_file, 'config/database.yml'
   # initialize new sprockets environment
   set :environment, Sprockets::Environment.new
 
@@ -28,29 +33,42 @@ class Foxhound < Sinatra::Base
   end
 
   get '/' do
-    @next_url = create_payment
     haml :pay_now
   end
 
-  get '/success/:reference' do
-    @payment_reference = params[:reference]
-    haml :success
+  post '/' do
+    payment = create_payment
+    redirect payment.next_url
   end
 
-  def base_url
-    "http://#{request.env['HTTP_HOST']}"
+  get '/payment/:reference' do
+    @payment = update_payment(params[:reference])
+    haml :payment
   end
 
   def create_payment
-    reference = SecureRandom.hex(4)
+    payment = Payment.create(
+      govpay_reference: SecureRandom.hex(4),
+      description: 'Scarfolk Council PCN',
+      amount: 4500
+    )
     GovukPayApiClient::CreatePayment.call(
-      OpenStruct.new(
-        description: 'Scarfolk council temporary event notice',
-        govpay_reference: reference,
-        amount: 2100
-      ),
-      "#{base_url}/success/#{reference}"
-    ).next_url
+      payment,
+      url("/payment/#{payment.govpay_reference}")
+    ).tap do |govpay_response|
+      payment.update(
+        govpay_payment_id: govpay_response.payment_id,
+        status: :created
+      )
+    end
+  end
+
+  def update_payment(reference)
+    payment = Payment.find_by!(govpay_reference: reference)
+    GovukPayApiClient::GetStatus.call(payment).tap do |govpay_response|
+      payment.update(status: govpay_response.status)
+    end
+    payment
   end
 end
 
