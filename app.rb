@@ -16,8 +16,7 @@ get '/success/:reference' do
 end
 
 def base_url
-  'https://dxw-foxhound.herokuapp.com'
-  # "https://#{request.env['HTTP_HOST']}"
+  "http://#{request.env['HTTP_HOST']}"
 end
 
 def create_payment
