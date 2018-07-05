@@ -1,6 +1,29 @@
-%h1 Welcome to Scarfolk Council
-%p To complete your temporary event notice application, please proceed to payment.
+.govuk-width-container
+  .govuk-main-wrapper
+    .govuk-grid-row
+      .govuk-grid-column-two-thirds
+        %h1.govuk-heading-xl Penalty charge details
+        %form{action: '/', method: 'post'}
+          .govuk-form-group
+            %label.govuk-label.govuk-label--m{for: 'pcn-number'}
+              Penalty Charge Notice (PCN) number
+            %span#pcn-number-hint.govuk-hint
+              For example, ABC 123 456
+            %input#pcn-number.govuk-input.govuk-input--width-20{'aria-describedby' => 'pcn-number-hint', name: 'pcn-number', type: 'text'}
+            %details.govuk-details{class: 'govuk-!-padding-top-3'}
+              %summary.govuk-details__summary
+                %span.govuk-details__summary-text
+                  Where can I find my PCN number?
+              .govuk-details__text
+                The PCN number can be found above the vehicle image in the top right hand corner of the PCN.
+          .govuk-form-group
+            %fieldset.govuk-fieldset{'aria-describedby' => 'registration-number-hint', role: 'group'}
+              %legend.govuk-fieldset__legend.govuk-fieldset__legend--m
+                Vehicle Registration Mark
+              %span#registration-number-hint.govuk-hint
+                For example, MH55 ALB
+              %input#registration-number.govuk-input.govuk-input--width-10{'aria-describedby' => 'registration-number-hint', name: 'pcn-number', type: 'text'}
 
-%form{ action: url('/'), method: :post }
-  %button.govuk-button{ type: :submit } Pay now
+          %button.govuk-button{type: 'submit'}
+            Pay now
 
