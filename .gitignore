@@ -1,3 +1,4 @@
 .byebug_history
 .bundle
 node_modules
+*.sqlite3
