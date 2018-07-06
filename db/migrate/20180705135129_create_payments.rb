@@ -5,6 +5,7 @@ class CreatePayments < ActiveRecord::Migration[5.2]
       t.string :govpay_reference
       t.integer :amount
       t.string :status
+      t.string :govpay_url
       t.string :govpay_payment_id
     end
   end
