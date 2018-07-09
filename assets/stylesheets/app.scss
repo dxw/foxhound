@@ -5,9 +5,24 @@ $govuk-brand-colour: #28a197;
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "../../node_modules/govuk-frontend/all";
 
-@include govuk-media-query($from: tablet) {
+.govuk-header__logotype-eye,.govuk-header__logotype-eye-fallback-image {
+    position: relative;
+    top: 7px;
+}
+
+.govuk-header__logo {
+  vertical-align: baseline;
+}
+
+@include govuk-media-query($from: desktop) {
   .govuk-header__logo {
     width: 32%;
+  }
+}
+
+@include govuk-media-query($until: desktop) {
+  .govuk-header__logo {
+    width: 100%;
   }
 }
 
