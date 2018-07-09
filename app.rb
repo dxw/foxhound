@@ -34,24 +34,38 @@ class Foxhound < Sinatra::Base
   end
 
   get '/' do
-    haml :pay_now
+    @pcn = PenaltyChargeNotice.new
+    haml :penalty_charge_notice
   end
 
-  post '/' do
-    payment = create_payment
-    redirect payment.next_url
+  post '/penalty-charge-notice' do
+    @pcn = create_penalty_charge_notice(params)
+    redirect pcn.payment.govpay_url if @pcn.valid?
+    haml :penalty_charge_notice
   end
 
   get '/payment/:reference' do
-    @payment = update_payment(params[:reference])
+    @payment = update_payment_status(params[:reference])
     haml :payment
   end
 
-  def create_payment
+  def create_penalty_charge_notice(params)
+    PenaltyChargeNotice.new(
+      pcn_number: params[:pcn_number],
+      vehicle_registration_mark: params[:registration_mark]
+    ).tap do |penalty_charge_notice|
+      if penalty_charge_notice.valid?
+        penalty_charge_notice.payment = create_payment(description: 'Scarfolk Council PCN', amount: 4500)
+        penalty_charge_notice.save
+      end
+    end
+  end
+
+  def create_payment(description:, amount:)
     payment = Payment.create(
       govpay_reference: SecureRandom.hex(4),
-      description: 'Scarfolk Council PCN',
-      amount: 4500
+      description: description,
+      amount: amount
     )
     GovukPayApiClient::CreatePayment.call(
       payment,
@@ -59,12 +73,14 @@ class Foxhound < Sinatra::Base
     ).tap do |govpay_response|
       payment.update(
         govpay_payment_id: govpay_response.payment_id,
+        govpay_url: govpay_response.next_url,
         status: :created
       )
     end
+    payment
   end
 
-  def update_payment(reference)
+  def update_payment_status(reference)
     payment = Payment.find_by!(govpay_reference: reference)
     GovukPayApiClient::GetStatus.call(payment).tap do |govpay_response|
       payment.update(status: govpay_response.status)

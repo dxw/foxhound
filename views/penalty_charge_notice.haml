@@ -3,13 +3,23 @@
     .govuk-grid-row
       .govuk-grid-column-two-thirds
         %h1.govuk-heading-xl Penalty charge details
-        %form{action: '/', method: 'post'}
+
+        - if @pcn.errors.any?
+          .govuk-error-summary{'aria-labelledby' => 'error-summary-title', 'data-module' => 'error-summary', role: 'alert', tabindex: '-1'}
+            %h2#error-summary-title.govuk-error-summary__title
+              There is a problem
+            .govuk-error-summary__body
+              %ul.govuk-list.govuk-error-summary__list
+                - @pcn.errors.full_messages.each do |error|
+                  %li= error
+
+        %form{action: '/penalty-charge-notice', method: 'post'}
           .govuk-form-group
             %label.govuk-label.govuk-label--m{for: 'pcn-number'}
               Penalty Charge Notice (PCN) number
             %span#pcn-number-hint.govuk-hint
               For example, ABC 123 456
-            %input#pcn-number.govuk-input.govuk-input--width-20{'aria-describedby' => 'pcn-number-hint', name: 'pcn-number', type: 'text'}
+            %input#pcn-number.govuk-input.govuk-input--width-20{'aria-describedby' => 'pcn-number-hint', name: 'pcn_number', type: 'text'}
             %details.govuk-details{class: 'govuk-!-padding-top-3'}
               %summary.govuk-details__summary
                 %span.govuk-details__summary-text
@@ -17,12 +27,12 @@
               .govuk-details__text
                 The PCN number can be found above the vehicle image in the top right hand corner of the PCN.
           .govuk-form-group
-            %fieldset.govuk-fieldset{'aria-describedby' => 'registration-number-hint', role: 'group'}
+            %fieldset.govuk-fieldset{'aria-describedby' => 'registration-mark-hint', role: 'group'}
               %legend.govuk-fieldset__legend.govuk-fieldset__legend--m
                 Vehicle Registration Mark
-              %span#registration-number-hint.govuk-hint
+              %span#registration-mark-hint.govuk-hint
                 For example, MH55 ALB
-              %input#registration-number.govuk-input.govuk-input--width-10{'aria-describedby' => 'registration-number-hint', name: 'pcn-number', type: 'text'}
+              %input#registration-mark.govuk-input.govuk-input--width-10{'aria-describedby' => 'registration-mark-hint', name: 'registration_mark', type: 'text'}
 
           %button.govuk-button{type: 'submit'}
             Pay now
