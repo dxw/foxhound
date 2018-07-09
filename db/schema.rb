@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_07_05_135129) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "payments", force: :cascade do |t|
     t.string "description"
     t.string "govpay_reference"
