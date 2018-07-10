@@ -1,2 +1,2 @@
-release: bundle exec rake db:migrate
+release: ./deploy-tasks.sh
 web: bundle exec rackup -p $PORT -E $RACK_ENV
