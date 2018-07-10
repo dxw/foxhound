@@ -25,7 +25,6 @@ class Payment < ActiveRecord::Base
   end
 
   def create_govpay_payment(return_url:)
-    return unless pending?
     GovukPayApiClient::CreatePayment.call(
       self,
       return_url
