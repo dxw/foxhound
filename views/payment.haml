@@ -9,4 +9,34 @@
   %p
     %a.govuk-back-link{ href: '/'} Back to homepage
 - else
-  %h1 There was a problem with your payment
+  %h1 Your Penalty Charge details
+
+  - if @payment.failed?
+    .govuk-error-summary{'aria-labelledby' => 'error-summary-title', 'data-module' => 'error-summary', role: 'alert', tabindex: '-1'}
+      %h2#error-summary-title.govuk-error-summary__title
+        There was a problem with your payment
+      .govuk-error-summary__body
+        %ul.govuk-list.govuk-error-summary__list
+          %li You were not charged and can attempt the payment again
+
+  .govuk-grid-row
+    .govuk-grid-column-two-thirds
+      %table.govuk-table
+        %tbody.govuk-table__body
+          %tr.govuk-table__row
+            %th.govuk-table__header{:scope => "row"} Penalty Charge Notice (PCN) number
+            %td.govuk-table__cell= @pcn.pcn_number
+          %tr.govuk-table__row
+            %th.govuk-table__header{:scope => "row"} Vehicle Registration Mark
+            %td.govuk-table__cell= @pcn.vehicle_registration_mark
+          %tr.govuk-table__row
+            %th.govuk-table__header{:scope => "row"} Total amount payable
+            %td.govuk-table__cell= "£#{@pcn.payment.amount / 100}"
+
+
+      %form{action: "/penalty-charge-notice/#{@pcn.payment.govpay_reference}/pay", method: 'post'}
+        %button.govuk-button{type: 'submit'}
+          Pay now
+
+
+

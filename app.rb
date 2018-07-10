@@ -34,42 +34,48 @@ class Foxhound < Sinatra::Base
   end
 
   get '/' do
-    haml :pay_now
+    @pcn = PenaltyChargeNotice.new
+    haml :penalty_charge_notice
   end
 
-  post '/' do
-    payment = create_payment
-    redirect payment.next_url
+  post '/penalty-charge-notice' do
+    @pcn = create_penalty_charge_notice(params)
+    redirect url("/penalty-charge-notice/#{@pcn.payment.govpay_reference}") if @pcn.valid?
+    haml :penalty_charge_notice
   end
 
-  get '/payment/:reference' do
-    @payment = update_payment(params[:reference])
+  get '/penalty-charge-notice/:reference' do
+    @payment = Payment.find_by!(govpay_reference: params[:reference])
+    @pcn = PenaltyChargeNotice.find_by(payment_id: @payment.id)
+    @payment.update_govpay_status
     haml :payment
   end
 
-  def create_payment
-    payment = Payment.create(
-      govpay_reference: SecureRandom.hex(4),
-      description: 'Scarfolk Council PCN',
-      amount: 4500
-    )
-    GovukPayApiClient::CreatePayment.call(
-      payment,
-      url("/payment/#{payment.govpay_reference}")
-    ).tap do |govpay_response|
-      payment.update(
-        govpay_payment_id: govpay_response.payment_id,
-        status: :created
-      )
+  post '/penalty-charge-notice/:reference/pay' do
+    @payment = Payment.find_by!(govpay_reference: params[:reference])
+    @payment.create_govpay_payment(return_url: url("/penalty-charge-notice/#{@payment.govpay_reference}"))
+    redirect @payment.govpay_url
+  end
+
+  def create_penalty_charge_notice(params)
+    PenaltyChargeNotice.new(
+      pcn_number: params[:pcn_number],
+      vehicle_registration_mark: params[:registration_mark]
+    ).tap do |penalty_charge_notice|
+      if penalty_charge_notice.valid?
+        penalty_charge_notice.payment = create_payment(description: 'Scarfolk Council PCN', amount: 4500)
+        penalty_charge_notice.save
+      end
     end
   end
 
-  def update_payment(reference)
-    payment = Payment.find_by!(govpay_reference: reference)
-    GovukPayApiClient::GetStatus.call(payment).tap do |govpay_response|
-      payment.update(status: govpay_response.status)
-    end
-    payment
+  def create_payment(description:, amount:)
+    Payment.create(
+      govpay_reference: SecureRandom.hex(4),
+      description: description,
+      amount: amount,
+      status: :pending
+    )
   end
 end
 
