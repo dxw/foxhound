@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_20_111856) do
+ActiveRecord::Schema.define(version: 2018_07_20_142203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_07_20_111856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "charge_type"
+    t.date "issued_at"
     t.index ["payment_id"], name: "index_penalty_charge_notices_on_payment_id"
   end
 
