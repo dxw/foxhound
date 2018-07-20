@@ -49,7 +49,7 @@ class Foxhound < Sinatra::Base
     ).tap do |penalty_charge_notice|
       if penalty_charge_notice.valid?
         penalty_charge_notice.payment = create_payment(
-          description: "Penalty Charge Notice - #{penalty_charge_notice.description}",
+          description: "Penalty Charge Notice - #{penalty_charge_notice.charge_type.humanize}",
           amount: penalty_charge_notice.charge_amount
         )
         penalty_charge_notice.save

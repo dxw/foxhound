@@ -18,7 +18,7 @@ class PenaltyChargeNotice < ActiveRecord::Base
   end
 
   def discounted?
-    ((14.days.ago)..(Time.now)).include?(issued_at)
+    issued_at > 14.days.ago
   end
 
   def description
