@@ -48,7 +48,10 @@ class Foxhound < Sinatra::Base
       vehicle_registration_mark: params[:registration_mark]
     ).tap do |penalty_charge_notice|
       if penalty_charge_notice.valid?
-        penalty_charge_notice.payment = create_payment(description: 'Scarfolk Council PCN', amount: 4500)
+        penalty_charge_notice.payment = create_payment(
+          description: "Penalty Charge Notice - #{penalty_charge_notice.charge_type.humanize}",
+          amount: penalty_charge_notice.charge_amount
+        )
         penalty_charge_notice.save
       end
     end
