@@ -31,7 +31,10 @@
             %td.govuk-table__cell= @pcn.vehicle_registration_mark
           %tr.govuk-table__row
             %th.govuk-table__header{:scope => "row"} Type of penalty
-            %td.govuk-table__cell= @pcn.charge_type.humanize
+            %td.govuk-table__cell= @pcn.description
+          %tr.govuk-table__row
+            %th.govuk-table__header{:scope => "row"} Issued date
+            %td.govuk-table__cell= @pcn.issued_at.strftime("%d/%m/%Y")
           %tr.govuk-table__row
             %th.govuk-table__header{:scope => "row"} Total amount payable
             %td.govuk-table__cell= "£#{@pcn.payment.amount / 100}"

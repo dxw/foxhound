@@ -21,6 +21,10 @@ class PenaltyChargeNotice < ActiveRecord::Base
     ((14.days.ago)..(Time.now)).include?(issued_at)
   end
 
+  def description
+    charge_type.humanize + (discounted? ? ' (early payment discount)' : '')
+  end
+
   private
 
   def prefill_data
