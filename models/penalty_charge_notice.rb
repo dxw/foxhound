@@ -13,7 +13,12 @@ class PenaltyChargeNotice < ActiveRecord::Base
   }.freeze
 
   def charge_amount
+    return CHARGES[charge_type.to_sym] / 2 if discounted?
     CHARGES[charge_type.to_sym]
+  end
+
+  def discounted?
+    ((14.days.ago)..(Time.now)).include?(issued_at)
   end
 
   private
