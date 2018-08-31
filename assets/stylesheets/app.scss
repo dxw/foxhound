@@ -5,9 +5,9 @@ $govuk-brand-colour: #28a197;
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "../../node_modules/govuk-frontend/all";
 
-.govuk-header__logotype-eye,.govuk-header__logotype-eye-fallback-image {
-    position: relative;
-    top: 7px;
+.govuk-header__logotype-logo,.govuk-header__logotype-logo-fallback-image {
+  position: relative;
+  top: 7px;
 }
 
 .govuk-header__logo {
